@@ -90,11 +90,11 @@ abstract class Model extends \mysqli
         return $this->find($id);
     }
 
-    # Where
-    # [
-    #    ['name', '=', 'value'],
-    #    ['name', '=', 'value']
-    # ]
+    /**
+     * Задаются параметры Where
+     * @param $arg - Вид должен быть таким: [ [column,'=', value] ]
+     * @return $this
+     */
     public function where($arg)
     {
         foreach($arg as $where_query) {
@@ -120,20 +120,17 @@ abstract class Model extends \mysqli
 
     /**
      * Метод позволяющий определить уникальное ли значение в таблице
-     * @param $column
-     * @param $value
+     * @param $column - колонка для проверки на уникальность
+     * @param $value - значение которое проверяется
      * @return bool
      */
-
-
-
-    public function unique_column($column, $value)
+    public function isNotUniqueColumn($column, $value)
     {
-        $value = $this->real_escape_string(trim($column));
+        $column = $this->real_escape_string(trim($column));
         $value = $this->real_escape_string(trim($value));
-    $query = "SELECT COUNT(*) FROM `{$this->table}` WHERE `{$column}` = '{$value}'";
-    $result = $this->query($query)->fetch_assoc();
-    return $result->count > 0;
+        $query = "SELECT COUNT(*) as `count` FROM `{$this->table}` WHERE `{$column}` = '{$value}'";
+        $result = $this->query($query)->fetch_assoc();
+        return $result['count'] > 0;
     }
 
     public function __destruct()

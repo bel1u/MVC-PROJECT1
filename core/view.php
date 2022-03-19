@@ -1,8 +1,9 @@
 <?php
 function view($name, $arg = []) {
     ob_start();
+    # Создаем переменные из названия ключей с использованием операции переменные переменных
     if(isset($arg) && $arg != [])
-        foreach ($arg as $key => $value) {
+        foreach($arg as $key => $value) {
             $$key = $value;
         }
     # Создание переменной error для записей ошибок
@@ -52,6 +53,7 @@ function view($name, $arg = []) {
                 </div>';
         }
     };
+
     include_once 'views/' . $name . '.php';
     $content = ob_get_contents();
     ob_clean();
