@@ -14,10 +14,10 @@ class UserController extends BaseController
     public function registerPost()
     {
         $errors = [];
-        if(!isset($_POST['name'])) $errors['name'][] = ['Нет поля name'];
-        if(!isset($_POST['login'])) $errors['login'][] = ['Нет поля login'];
-        if(!isset($_POST['password'])) $errors['password'][] = ['Нет поля password'];
-        if(!isset($_POST['password_confirmed'])) $errors['password_confirmed'][] = ['Нет поля password_confirmed'];
+        if(!isset($_POST['name'])) $errors['name'][] = 'Нет поля name';
+        if(!isset($_POST['login'])) $errors['login'][] = 'Нет поля login';
+        if(!isset($_POST['password'])) $errors['password'][] = 'Нет поля password';
+        if(!isset($_POST['password_confirmed'])) $errors['password_confirmed'][] = 'Нет поля password_confirmed';
 
         if(empty($_POST['name'])) $errors['name'][] = 'Поле name не заполнено!';
         if(empty($_POST['login'])) $errors['login'][] = 'Поле login не заполнено!';
