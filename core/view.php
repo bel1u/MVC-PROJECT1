@@ -1,6 +1,10 @@
 <?php
 function view($name, $arg = []) {
     ob_start();
+    if(isset($arg) && $arg != [])
+        foreach ($arg as $key => $value) {
+            $$key = $value;
+        }
     # Создание переменной error для записей ошибок
     $error = ($arg['errors'] ?? []);
 
